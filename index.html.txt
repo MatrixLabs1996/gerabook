@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeraBook - Landing Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo ao GeraBook!</h1>
+        <p>Descubra como criar eBooks automaticamente com IA.</p>
+    </header>
+    <!-- Seu conteúdo da landing page aqui -->
+    <footer>
+        <p>&copy; 2025 GeraBook. Todos os direitos reservados.</p>
+    </footer>
+    <script src="script.js"></script> <!-- Se houver JS -->
+</body>
+</html>
