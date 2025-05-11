@@ -1,88 +1,445 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GeraBook - Crie eBooks com IA</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeraBook - Criação Automática de eBooks com IA</title>
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <link rel="stylesheet" href="styles.css" />
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #0f1116; color: #fff; }
-    header { background-color: #11131a; padding: 60px 20px; text-align: center; }
-    header h1 { font-size: 2.5em; color: #00e0ff; margin-bottom: 20px; }
-    header p { font-size: 1.2em; color: #ccc; margin-bottom: 30px; }
-    header a { background-color: #00e0ff; color: #111; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; }
-    section { padding: 60px 20px; max-width: 900px; margin: auto; }
-    h2 { color: #00e0ff; margin-bottom: 20px; }
-    .steps, .benefits, .faq { display: flex; flex-direction: column; gap: 20px; }
-    .testimonials { background-color: #1a1c23; padding: 40px 20px; border-radius: 12px; }
-    .testimonial { margin-bottom: 20px; font-style: italic; color: #ccc; }
-    .plan { background-color: #00e0ff; color: #111; padding: 30px; border-radius: 12px; text-align: center; margin-top: 40px; }
-    .plan h3 { margin-bottom: 10px; }
-    .plan p { margin-bottom: 20px; }
-    footer { background-color: #11131a; padding: 30px 20px; text-align: center; font-size: 0.9em; color: #666; }
-    footer a { color: #00e0ff; text-decoration: none; margin: 0 10px; }
+    .pricing-section {
+  padding: 60px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #0f0f0f 0%, #001f3f 100%);
+}
+
+.pricing-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.pricing-subtitle {
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+.pricing-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.card {
+  background: #1c1c1c;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 30px 20px;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  position: relative;
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.price span {
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.desc {
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.card ul {
+  text-align: left;
+  padding-left: 0;
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+
+.card ul li {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.card ul li.disabled {
+  color: #aaa;
+  text-decoration: line-through;
+}
+
+.card .cta-button {
+  width: 100%;
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.card .cta-button:hover {
+  background-color: #0056b3;
+}
+
+.destaque {
+  border: 2px solid #007bff;
+  background: #1c1c1c;
+}
+
+.badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #007bff;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f0f0f;
+      color: #ffffff;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #0f0f0f;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      flex: 1;
+      justify-content: center;
+      min-width: 200px;
+    }
+
+    .nav-center a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .right-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      min-width: 200px;
+      justify-content: flex-end;
+    }
+
+    .lang-select {
+      position: relative;
+    }
+
+    .lang-button {
+      background: black;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lang-button img {
+      width: 20px;
+      height: auto;
+      vertical-align: middle;
+    }
+
+    .lang-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      background-color: #1c1c1c;
+      border-radius: 8px;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    .lang-dropdown div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .lang-dropdown div:hover {
+      background-color: #333;
+    }
+
+    .lang-dropdown img {
+      width: 20px;
+      height: auto;
+    }
+
+    .lang-select:hover .lang-dropdown {
+      display: block;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px 70px;
+      background: linear-gradient(135deg, #0f0f0f 0%, #001f3f 100%);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      background: linear-gradient(to right, #00bfff, #1e90ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 30px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: white;
+      margin-bottom: 50px;
+    }
+
+    .cta-button {
+      background: linear-gradient(90deg, #00bfff, #1e90ff);
+      color: white;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .cta-button:hover {
+      background: linear-gradient(90deg, #1e90ff, #00bfff);
+    }
+
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .floating-whatsapp img {
+      width: 60px;
+      height: 60px;
+    }
+
+    .benefits-section {
+      padding: 60px 20px;
+      background-color: #121212;
+      text-align: center;
+    }
+
+    .benefits-section h2 {
+      font-size: 2.5rem;
+      color: #00bfff;
+      margin-bottom: 40px;
+    }
+
+    .benefits-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .benefit-box {
+      background-color: #1e1e1e;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 191, 255, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .benefit-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .benefit-box h3 {
+      color: #1e90ff;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+    }
+
+    .benefit-box p {
+      color: #cccccc;
+      font-size: 1rem;
+    }
+
+   
+    footer {
+      background-color: #0f0f0f;
+      padding: 20px;
+      text-align: center;
+      color: #ffffff;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
+
 <body>
   <header>
-    <header>
-  <!-- Inserindo a logo -->
-  <img src="images/logo.png" alt="Logo GeraBook" style="max-width: 200px; margin-bottom: 20px;">
-  
-  <h1>Crie eBooks Completos com IA em Minutos</h1>
-  <p>A GeraBook transforma suas ideias em livros digitais profissionais com apenas alguns cliques.</p>
-  <a href="#plan">Teste Grátis Agora</a>
-</header>
+    <img src="images/logo.png" alt="GeraBook Logo" class="logo" />
 
+    <nav class="nav-center">
+      <a href="#planos">Planos</a>
+      <a href="#explorar">Explorar eBooks</a>
+      <a href="#blog">Blog</a>
+    </nav>
+
+    <div class="right-section">
+      <div class="lang-select">
+        <div class="lang-button"><img src="images/bandeiras/br.png" alt="Português" /> Português</div>
+        <div class="lang-dropdown">
+          <div><img src="images/bandeiras/br.png" alt="Português" /> Português</div>
+          <div><img src="images/bandeiras/de.png" alt="Deutsch" /> Deutsch</div>
+          <div><img src="images/bandeiras/it.png" alt="Italiano" /> Italiano</div>
+          <div><img src="images/bandeiras/es.png" alt="Español" /> Español</div>
+          <div><img src="images/bandeiras/us.png" alt="English" /> English</div>
+          <div><img src="images/bandeiras/fr.png" alt="Français" /> Français</div>
+          <div><img src="images/bandeiras/pl.png" alt="Polski" /> Polski</div>
+        </div>
+      </div>
+      <button class="cta-button">Login</button>
+    </div>
   </header>
 
-  <section>
-    <h2>Como Funciona</h2>
-    <div class="steps">
-      <p><strong>Passo 1:</strong> Escolha o tema do seu eBook</p>
-      <p><strong>Passo 2:</strong> Preencha poucas informações (título, objetivo, público)</p>
-      <p><strong>Passo 3:</strong> A IA gera seu eBook em minutos</p>
-      <p><strong>Passo 4:</strong> Baixe, edite e publique</p>
-    </div>
+  <section class="hero">
+    <h1>Crie eBooks Incríveis com Inteligência Artificial</h1>
+    <p style="color: white;">Transforme ideias em livros digitais profissionais em poucos minutos com o GeraBook.</p>
+    <button class="cta-button">Comece Gratuitamente</button>
   </section>
 
-  <section>
-    <h2>Benefícios da GeraBook</h2>
-    <div class="benefits">
-      <p>✅ Geração automática e personalizada</p>
-      <p>✅ Modelos prontos para capa e diagramação</p>
-      <p>✅ Ebooks revisados com linguagem profissional</p>
-      <p>✅ Integração fácil com Hotmart, KDP, etc.</p>
-      <p>✅ Planos acessíveis para todos os níveis</p>
+  <section class="benefits-section">
+    <h2>Por que usar o GeraBook?</h2>
+    <div class="benefits-container">
+      <div class="benefit-box">
+        <h3>Criação Rápida</h3>
+        <p>Gere um eBook completo em menos de 03 minutos com poucos cliques.</p>
+      </div>
+      <div class="benefit-box">
+        <h3>Textos Profissionais</h3>
+        <p>Conteúdo coeso, bem estruturado e pronto para publicação.</p>
+      </div>
+      <div class="benefit-box">
+        <h3>Economia de Tempo</h3>
+        <p>Chega de passar dias ou semanas escrevendo. Automatize o processo.</p>
+      </div>
+      <div class="benefit-box">
+        <h3>Capas Atraentes</h3>
+        <p>Escolha entre modelos modernos de capa criados por IA.</p>
+      </div>
+      <div class="benefit-box">
+        <h3>Pronto para Vender</h3>
+        <p>Receba um eBook formatado para PDF, ePUB, Kindle e muito mais.</p>
+      </div>
+      <div class="benefit-box">
+        <h3>Personalização Fácil</h3>
+        <p>Adapte o conteúdo ao seu estilo com edições simples e rápidas.</p>
+      </div>
     </div>
   </section>
-
-  <section class="testimonials">
-    <h2>O que estão dizendo</h2>
-    <div class="testimonial">"Consegui lançar meu eBook em 2 horas. Nunca imaginei ser tão fácil!" — João, infoprodutor</div>
-    <div class="testimonial">"Economizei semanas de trabalho com a GeraBook." — Camila, coach de carreira</div>
-  </section>
-
-  <section id="plan">
-    <div class="plan">
-      <h3>Plano Promocional de Lançamento</h3>
-      <p><strong>R$37,90/mês</strong> — Acesso ilimitado à geração de eBooks</p>
-      <p>📆 Garantia de 7 dias ou seu dinheiro de volta</p>
-      <a href="#">Começar Agora</a>
+<section class="pricing-section" id="planos">
+  <h2 class="pricing-title">Planos acessíveis para todos os criadores</h2>
+  <p class="pricing-subtitle">Escolha o plano perfeito para suas necessidades e comece a criar eBooks profissionais hoje mesmo.</p>
+  <div class="pricing-cards">
+    <div class="card">
+      <h3>Starter</h3>
+      <p class="price">Grátis</p>
+      <p class="desc">Para experimentar e conhecer a plataforma.</p>
+      <ul>
+        <li>✓ 1 eBook por mês</li>
+        <li>✓ Até 10 páginas por eBook</li>
+        <li>✓ 5 modelos básicos</li>
+        <li>✓ Exportação em PDF</li>
+        <li>✓ Geração de conteúdo básica</li>
+        <li>✓ Marca d'água GeraBook</li>
+        <li class="disabled">✕ Modelos premium</li>
+        <li class="disabled">✕ Removedor de marca d'água</li>
+      </ul>
+      <button class="cta-button">Começar Grátis</button>
     </div>
-  </section>
-
-  <section>
-    <h2>Perguntas Frequentes</h2>
-    <div class="faq">
-      <p><strong>Preciso saber escrever?</strong> ✔️ Não! Nossa IA faz tudo com base nas suas ideias.</p>
-      <p><strong>Posso cancelar quando quiser?</strong> ✔️ Sim, sem contratos ou multas.</p>
-      <p><strong>Os eBooks são únicos?</strong> ✔️ Sim, criados sob medida com IA.</p>
+    
+    <div class="card destaque">
+      <div class="badge">Mais Popular</div>
+      <h3>Plus</h3>
+      <p class="price">R$37,90<span>/mês</span></p>
+      <p class="desc">Ideal para criadores de conteúdo regulares.</p>
+      <ul>
+        <li>✓ 10 eBooks por mês</li>
+        <li>✓ Até 50 páginas por eBook</li>
+        <li>✓ Acesso a 20 modelos</li>
+        <li>✓ Exportação em PDF, EPUB, KDP.</li>
+        <li>✓ Geração de conteúdo avançada</li>
+        <li>✓ Sem marca d’água</li>
+        <li>✓ Modelos premium</li>
+        <li class="disabled">✕ Suporte prioritário</li>
+      </ul>
+      <button class="cta-button">Escolher Plano</button>
     </div>
-  </section>
+    
+    <div class="card">
+      <h3>Pro</h3>
+      <p class="price">R$97,90<span>/mês</span></p>
+      <p class="desc">Para profissionais e empresas.</p>
+      <ul>
+        <li>✓ eBooks ilimitados</li>
+        <li>✓ Páginas ilimitadas</li>
+        <li>✓ Acesso a todos os modelos</li>
+        <li>✓ Exportação em todos os formatos</li>
+        <li>✓ Geração de conteúdo ilimitada</li>
+        <li>✓ Personalização avançada</li>
+        <li>✓ Modelos exclusivos</li>
+        <li>✓ Suporte prioritário 24/7</li>
+      </ul>
+      <button class="cta-button">Escolher Plano</button>
+    </div>
+  </div>
+</section>
+
+  <a href="https://wa.me/5585996625304" target="_blank" class="floating-whatsapp">
+    <img src="images/whatsapp-icon.png" alt="WhatsApp">
+  </a>
 
   <footer>
-    <p>&copy; 2025 GeraBook. Todos os direitos reservados.</p>
-    <p><a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a> | <a href="mailto:contato@gerabook.com.br">Contato</a></p>
+    &copy; 2025 GeraBook. Todos os direitos reservados.
   </footer>
 </body>
+
 </html>
